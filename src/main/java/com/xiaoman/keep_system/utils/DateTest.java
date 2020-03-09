@@ -20,7 +20,7 @@ public class DateTest {
         System.out.println("当前时间"+dateStr);
 
         String string1 = "2020-01-27 00:00:00";
-        String string2 = "2020-01-30 00:00:00";
+        String string2 = "2020-01-30 23:59:59";
         try {
             Date date1 = simpleDateFormat2.parse(string1);
             Date date2 = simpleDateFormat2.parse(string2);

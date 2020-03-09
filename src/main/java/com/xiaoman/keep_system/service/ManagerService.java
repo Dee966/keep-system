@@ -1,10 +1,14 @@
 package com.xiaoman.keep_system.service;
 
 import com.xiaoman.keep_system.dao.ManagerDao;
+import com.xiaoman.keep_system.exception.GlobleException;
+import com.xiaoman.keep_system.pojo.dto.CoachDto;
+import com.xiaoman.keep_system.pojo.dto.CusDto;
 import com.xiaoman.keep_system.pojo.po.Manager;
 import com.xiaoman.keep_system.pojo.po.Share;
 import com.xiaoman.keep_system.pojo.vo.DateVo;
 import com.xiaoman.keep_system.pojo.vo.ManagerVo;
+import com.xiaoman.keep_system.result.CodeMsg;
 import com.xiaoman.keep_system.utils.MyUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,5 +70,33 @@ public class ManagerService {
     public void delShare(int shareId){
         managerDao.delComment(shareId);
         managerDao.delShare(shareId);
+    }
+
+    public CusDto getCusByPhone(String telephone){
+        CusDto cusDto = managerDao.getCusByPhone(telephone);
+        if (cusDto == null){
+            throw new GlobleException(CodeMsg.CUSTOMER_NULL);
+        }
+        return cusDto;
+    }
+
+    public String uploadCoachImg(MultipartFile picture) throws IOException {
+        return MyUpload.pictureUpload(picture);
+    }
+
+    public List<CusDto> listCustomer(){
+        List<CusDto> cusDtos = managerDao.listCustomer();
+        if (cusDtos.isEmpty()){
+            throw new GlobleException(CodeMsg.CUSTOMER_EMPTY);
+        }
+        return cusDtos;
+    }
+
+    public List<CoachDto> listCoach(){
+        List<CoachDto> coachDtos = managerDao.listCoach();
+        if (coachDtos == null){
+            throw new GlobleException(CodeMsg.COACH_EMPTY);
+        }
+        return coachDtos;
     }
 }

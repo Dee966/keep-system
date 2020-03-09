@@ -1,5 +1,7 @@
 package com.xiaoman.keep_system.controller;
 
+import com.xiaoman.keep_system.pojo.dto.CoachDto;
+import com.xiaoman.keep_system.pojo.dto.CusDto;
 import com.xiaoman.keep_system.pojo.po.Manager;
 import com.xiaoman.keep_system.pojo.po.Share;
 import com.xiaoman.keep_system.pojo.vo.DateVo;
@@ -120,5 +122,46 @@ public class ManagerController {
     public Result<Object> delShare(@PathVariable int shareId){
         managerService.delShare(shareId);
         return Result.success(null);
+    }
+
+    /**
+     * @param telephone
+     * @return com.xiaoman.keep_system.result.Result<com.xiaoman.keep_system.pojo.dto.CusDto>
+     * @desc 用电话号码获取会员
+     * @author Joe
+     * @date 2020/2/4 21:55
+     */
+    @GetMapping("/{telephone}")
+    public Result<CusDto> getCusByPhone(@PathVariable String telephone){
+        return Result.success(managerService.getCusByPhone(telephone));
+    }
+
+    @PostMapping("/coach_img")
+    public Result<String> uploadCoachImg(@RequestParam("img") MultipartFile picture) throws IOException {
+        return Result.success(managerService.uploadCoachImg(picture));
+    }
+
+    /**
+     * @param
+     * @return com.xiaoman.keep_system.result.Result<com.xiaoman.keep_system.pojo.dto.CusDto>
+     * @desc 获取所有用户
+     * @author Joe
+     * @date 2020/2/5 21:11
+     */
+    @GetMapping("/list_customer")
+    public Result<List<CusDto>> listCustomer(){
+        return Result.success(managerService.listCustomer());
+    }
+
+    /**
+     * @param
+     * @return com.xiaoman.keep_system.result.Result<java.util.List<com.xiaoman.keep_system.pojo.dto.CoachDto>>
+     * @desc 获取所有教练
+     * @author Joe
+     * @date 2020/2/5 21:56
+     */
+    @GetMapping("/list_coach")
+    public Result<List<CoachDto>> listCoach(){
+        return Result.success(managerService.listCoach());
     }
 }

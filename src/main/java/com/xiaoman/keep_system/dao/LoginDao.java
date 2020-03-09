@@ -18,11 +18,11 @@ public interface LoginDao {
     @Select("select * from manager where username = #{username}")
     Manager getMaByUsername(String username);
 
-    @Insert("insert into customer values(null,#{username},#{password},null,null,null,null,null,null,null,null,null,null,null)")
+    @Insert("insert into customer values(null,#{username},#{password},#{email},#{telephone},#{name},null,null,null,null,#{times},#{joinTime},null,null)")
     @Options(useGeneratedKeys = true,keyProperty = "customerId",keyColumn = "customer_id")
     Integer registerCus(Customer customer);
 
-    @Insert("insert into coach values(null,#{username},#{password},null,null,null,null,null,null,null,null,null,null,null,null,null)")
+    @Insert("insert into coach values(null,#{username},#{password},#{email},#{telephone},#{name},#{img},#{sex},#{age},#{tall},#{weight},#{workTime},#{workExperience},#{title},null,#{managerId})")
     void registerCoach(Coach coach);
 
     @Insert("insert into manager values(null,#{username},#{password},null,null,null)")

@@ -1,16 +1,17 @@
 package com.xiaoman.keep_system.service;
 
 import com.xiaoman.keep_system.dao.CoachDao;
+import com.xiaoman.keep_system.pojo.dto.AttendanceDto;
 import com.xiaoman.keep_system.pojo.dto.CoachDto;
-import com.xiaoman.keep_system.pojo.po.Attendance;
 import com.xiaoman.keep_system.pojo.po.Coach;
+import com.xiaoman.keep_system.pojo.po.CoachLog;
 import com.xiaoman.keep_system.pojo.vo.AttendanceVo;
 import com.xiaoman.keep_system.pojo.vo.ClockInVo;
 import com.xiaoman.keep_system.pojo.vo.CoachVo;
+import com.xiaoman.keep_system.pojo.vo.DeleteCusVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,17 +43,23 @@ public class CoachService {
         }
     }
 
-    public List<Attendance> listTime(int coachId){
+    public List<AttendanceDto> listTime(int coachId){
         return coachDao.listTime(coachId);
     }
 
-    public List<Attendance> listDate(int coachId, AttendanceVo attendanceVo){
+    public List<AttendanceDto> listDate(AttendanceVo attendanceVo){
         Long start = attendanceVo.getStart();
         Long end = attendanceVo.getEnd();
-        return coachDao.listDate(coachId,start,end);
+        return coachDao.listDate(attendanceVo.getId(),start,end);
     }
 
     public List<CoachDto> listCoach(){
         return coachDao.listCoach();
+    }
+
+    public void delCoach(DeleteCusVo deleteCusVo){
+        CoachLog coachLog = new CoachLog(null,new Date(),deleteCusVo.getCustomerId(),deleteCusVo.getManagerId());
+        coachDao.logDelCoach(coachLog);
+        coachDao.delCoach(deleteCusVo.getCustomerId());
     }
 }

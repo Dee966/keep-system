@@ -6,10 +6,7 @@ import com.xiaoman.keep_system.exception.GlobleException;
 import com.xiaoman.keep_system.pojo.po.Coach;
 import com.xiaoman.keep_system.pojo.po.Customer;
 import com.xiaoman.keep_system.pojo.po.Manager;
-import com.xiaoman.keep_system.pojo.vo.CodeVo;
-import com.xiaoman.keep_system.pojo.vo.LoginVo;
-import com.xiaoman.keep_system.pojo.vo.MailVo;
-import com.xiaoman.keep_system.pojo.vo.NewPassVo;
+import com.xiaoman.keep_system.pojo.vo.*;
 import com.xiaoman.keep_system.result.CodeMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,26 +40,26 @@ public class LoginService {
         return loginDao.getMaByUsername(username);
     }
 
-    public Integer registerCus(LoginVo loginVo){
-        String username = loginVo.getUsername();
-        String password = loginVo.getPassword();
+    public Integer registerCus(RegisterVo registerVo){
+        String username = registerVo.getUsername();
+        String password = registerVo.getPassword();
         //判断用户名是否已存在
-        if (loginDao.getCusByUsername(loginVo.getUsername()) != null){
+        if (loginDao.getCusByUsername(registerVo.getUsername()) != null){
             throw new GlobleException(CodeMsg.USER_EXIST);
         }
-        Customer customer = new Customer(new LoginVo(username,password));
+        Customer customer = new Customer(registerVo);
         loginDao.registerCus(customer);
         return customer.getCustomerId();
     }
 
-    public void registerCoach(LoginVo loginVo){
-        String username = loginVo.getUsername();
-        String password = loginVo.getPassword();
+    public void registerCoach(RegCoachVo regCoachVo){
+        String username = regCoachVo.getUsername();
+        String password = regCoachVo.getPassword();
         //判断用户名是否已存在
-        if (loginDao.getCoachByUsername(loginVo.getUsername()) != null){
+        if (loginDao.getCoachByUsername(regCoachVo.getUsername()) != null){
             throw new GlobleException(CodeMsg.USER_EXIST);
         }
-        Coach coach = new Coach(new LoginVo(username,password));
+        Coach coach = new Coach(regCoachVo);
         loginDao.registerCoach(coach);
     }
 

@@ -1,12 +1,13 @@
 package com.xiaoman.keep_system.dao;
 
+import com.xiaoman.keep_system.pojo.dto.CoachDto;
+import com.xiaoman.keep_system.pojo.dto.CusDto;
 import com.xiaoman.keep_system.pojo.po.Manager;
 import com.xiaoman.keep_system.pojo.po.Share;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -32,4 +33,13 @@ public interface ManagerDao {
 
     @Delete("delete from comment where share_id = #{shareId}")
     void delComment(int shareId);
+
+    @Select("select customer_id,name,email,telephone,times,join_time from customer where telephone = #{telephone}")
+    CusDto getCusByPhone(String telephone);
+
+    @Select("select customer_id,name,email,telephone,times,join_time from customer")
+    List<CusDto> listCustomer();
+
+    @Select("select email,telephone,name,img,sex,age,tall,weight,work_time,work_experience,title from coach")
+    List<CoachDto> listCoach();
 }

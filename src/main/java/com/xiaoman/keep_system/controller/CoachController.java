@@ -1,10 +1,12 @@
 package com.xiaoman.keep_system.controller;
 
+import com.xiaoman.keep_system.pojo.dto.AttendanceDto;
 import com.xiaoman.keep_system.pojo.dto.CoachDto;
 import com.xiaoman.keep_system.pojo.po.Attendance;
 import com.xiaoman.keep_system.pojo.vo.AttendanceVo;
 import com.xiaoman.keep_system.pojo.vo.ClockInVo;
 import com.xiaoman.keep_system.pojo.vo.CoachVo;
+import com.xiaoman.keep_system.pojo.vo.DeleteCusVo;
 import com.xiaoman.keep_system.result.Result;
 import com.xiaoman.keep_system.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,21 +80,20 @@ public class CoachController {
      * @date 2020/1/25 23:58
      */
     @GetMapping("/list_time/{coachId}")
-    public Result<List<Attendance>> listTime(@PathVariable int coachId){
+    public Result<List<AttendanceDto>> listTime(@PathVariable int coachId){
         return Result.success(coachService.listTime(coachId));
     }
 
     /**
-     * @param coachId
 	 * @param attendanceVo
      * @return com.xiaoman.keep_system.result.Result<java.util.List<com.xiaoman.keep_system.pojo.po.Attendance>>
      * @desc 按时间段查询打卡记录
      * @author Joe
      * @date 2020/1/26 0:02
      */
-    @GetMapping("/list_date/{coachId}")
-    public Result<List<Attendance>> listDate(@PathVariable int coachId,@RequestBody AttendanceVo attendanceVo){
-        return Result.success(coachService.listDate(coachId,attendanceVo));
+    @PostMapping("/list_date")
+    public Result<List<AttendanceDto>> listDate(@RequestBody AttendanceVo attendanceVo){
+        return Result.success(coachService.listDate(attendanceVo));
     }
 
     /**
@@ -105,5 +106,11 @@ public class CoachController {
     @GetMapping("/list_coach")
     public Result<List<CoachDto>> listCoach(){
         return Result.success(coachService.listCoach());
+    }
+
+    @PostMapping("/delete")
+    public Result<Object> delCoach(@RequestBody DeleteCusVo deleteCusVo){
+        coachService.delCoach(deleteCusVo);
+        return Result.success(null);
     }
 }

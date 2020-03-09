@@ -24,6 +24,11 @@ public class CodeMsg {
     public static CodeMsg COACH_EXIST = new CodeMsg(3101, "您已选择教练，若需更换教练可与管理员沟通。");
     public static CodeMsg INFO_NULL = new CodeMsg(3102, "您未完善个人信息。");
 
+    //管理员模块错误码4
+    public static CodeMsg CUSTOMER_NULL = new CodeMsg(4101, "不存在此会员");
+    public static CodeMsg CUSTOMER_EMPTY = new CodeMsg(4102, "暂时没有会员加入");
+    public static CodeMsg COACH_EMPTY = new CodeMsg(4103, "暂时没有教练加入");
+
 
     private CodeMsg() {
     }

@@ -2,10 +2,7 @@ package com.xiaoman.keep_system.dao;
 
 import com.xiaoman.keep_system.pojo.dto.CoachDto;
 import com.xiaoman.keep_system.pojo.dto.CustomerDto;
-import com.xiaoman.keep_system.pojo.po.Coach;
-import com.xiaoman.keep_system.pojo.po.Comment;
-import com.xiaoman.keep_system.pojo.po.Customer;
-import com.xiaoman.keep_system.pojo.po.Share;
+import com.xiaoman.keep_system.pojo.po.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -59,5 +56,10 @@ public interface CustomerDao {
     @Select("SELECT * FROM `share` ORDER BY share_id DESC")
     List<Share> listShare();
 
+    @Insert("insert into customer_log values(null,#{customerLeave},#{customerId},#{managerId})")
+    void logDelCus(CustomerLog customerLog);
+
+    @Delete("delete from customer where customer_id = #{customerId}")
+    void delCus(int customerId);
 
 }

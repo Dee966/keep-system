@@ -6,6 +6,7 @@ import com.xiaoman.keep_system.pojo.po.Customer;
 import com.xiaoman.keep_system.pojo.po.Share;
 import com.xiaoman.keep_system.pojo.vo.ChCoachVo;
 import com.xiaoman.keep_system.pojo.vo.CustomerVo;
+import com.xiaoman.keep_system.pojo.vo.DeleteCusVo;
 import com.xiaoman.keep_system.pojo.vo.PraiseVo;
 import com.xiaoman.keep_system.result.Result;
 import com.xiaoman.keep_system.service.CustomerService;
@@ -130,8 +131,22 @@ public class CustomerController {
         return Result.success(null);
     }
 
+    /**
+     * @param shareId
+     * @return com.xiaoman.keep_system.result.Result<java.util.List<com.xiaoman.keep_system.pojo.po.Comment>>
+     * @desc 获取某条分享的所有评论
+     * @author Joe
+     * @date 2020/2/5 21:06
+     */
     @GetMapping("/comment/{shareId}")
     public Result<List<Comment>> listComment(@PathVariable int shareId){
         return Result.success(customerService.listComment(shareId));
     }
+
+    @PostMapping("/delete")
+    public Result<Object> delCus(@RequestBody DeleteCusVo deleteCusVo){
+        customerService.delCus(deleteCusVo);
+        return Result.success(null);
+    }
+
 }

@@ -9,10 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.util.List;
 
-/**
- * @Author Hoki(谭鸿兴)
- * @Date 2019/11/13 14:45
- */
 
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurationSupport {

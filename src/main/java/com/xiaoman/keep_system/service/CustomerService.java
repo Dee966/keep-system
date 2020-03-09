@@ -7,9 +7,11 @@ import com.xiaoman.keep_system.exception.GlobleException;
 import com.xiaoman.keep_system.pojo.dto.CustomerDto;
 import com.xiaoman.keep_system.pojo.po.Comment;
 import com.xiaoman.keep_system.pojo.po.Customer;
+import com.xiaoman.keep_system.pojo.po.CustomerLog;
 import com.xiaoman.keep_system.pojo.po.Share;
 import com.xiaoman.keep_system.pojo.vo.ChCoachVo;
 import com.xiaoman.keep_system.pojo.vo.CustomerVo;
+import com.xiaoman.keep_system.pojo.vo.DeleteCusVo;
 import com.xiaoman.keep_system.pojo.vo.PraiseVo;
 import com.xiaoman.keep_system.result.CodeMsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +80,12 @@ public class CustomerService {
 
     public List<Share> listShare(){
         return customerDao.listShare();
+    }
+
+    public void delCus(DeleteCusVo deleteCusVo){
+        //记录删除
+        CustomerLog customerLog = new CustomerLog(null,new Date(),deleteCusVo.getCustomerId(),deleteCusVo.getManagerId());
+        customerDao.logDelCus(customerLog);
+        customerDao.delCus(deleteCusVo.getCustomerId());
     }
 }

@@ -1,14 +1,17 @@
 package com.xiaoman.keep_system.pojo.po;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 public class CustomerLog {
     private Integer customerLogId;
-    private String customerLeave;
+    private Date customerLeave;
     private Integer customerId;
     private Integer managerId;
 
     public CustomerLog(){}
 
-    public CustomerLog(Integer customerLogId, String customerLeave, Integer customerId, Integer managerId) {
+    public CustomerLog(Integer customerLogId, Date customerLeave, Integer customerId, Integer managerId) {
         this.customerLogId = customerLogId;
         this.customerLeave = customerLeave;
         this.customerId = customerId;
@@ -23,11 +26,11 @@ public class CustomerLog {
         this.customerLogId = customerLogId;
     }
 
-    public String getCustomerLeave() {
+    public Date getCustomerLeave() {
         return customerLeave;
     }
 
-    public void setCustomerLeave(String customerLeave) {
+    public void setCustomerLeave(Date customerLeave) {
         this.customerLeave = customerLeave;
     }
 
@@ -51,7 +54,7 @@ public class CustomerLog {
     public String toString() {
         return "CustomerLog{" +
                 "customerLogId=" + customerLogId +
-                ", customerLeave='" + customerLeave + '\'' +
+                ", customerLeave=" + customerLeave +
                 ", customerId=" + customerId +
                 ", managerId=" + managerId +
                 '}';

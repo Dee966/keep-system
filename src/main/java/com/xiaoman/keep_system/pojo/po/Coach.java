@@ -1,8 +1,8 @@
 package com.xiaoman.keep_system.pojo.po;
 
-import com.xiaoman.keep_system.pojo.vo.CoachVo;
-import com.xiaoman.keep_system.pojo.vo.LoginVo;
-import com.xiaoman.keep_system.pojo.vo.NewPassVo;
+import com.xiaoman.keep_system.pojo.vo.*;
+
+import java.util.Date;
 
 public class Coach {
     private Integer coachId;
@@ -16,13 +16,29 @@ public class Coach {
     private Integer age;
     private String tall;
     private String weight;
-    private String workTime;
+    private Date workTime;
     private String workExperience;
     private String title;
     private String safeCode;
     private String managerId;
 
     public Coach(){}
+
+    public Coach(RegCoachVo regCoachVo){
+        this.username = regCoachVo.getUsername();
+        this.password = regCoachVo.getPassword();
+        this.name = regCoachVo.getName();
+        this.email = regCoachVo.getEmail();
+        this.telephone = regCoachVo.getTelephone();
+        this.workTime = regCoachVo.getWorkTime();
+        this.title = regCoachVo.getTitle();
+        this.age = regCoachVo.getAge();
+        this.sex = regCoachVo.getSex();
+        this.img = regCoachVo.getImg();
+        this.tall = regCoachVo.getTall();
+        this.weight = regCoachVo.getWeight();
+        this.workExperience = regCoachVo.getWorkExperience();
+    }
 
     public Coach(int coachId, CoachVo coachVo){
         this.coachId = coachId;
@@ -43,7 +59,7 @@ public class Coach {
         this.password = loginVo.getPassword();
     }
 
-    public Coach(Integer coachId, String username, String password, String email, String telephone, String name, String img, String sex, Integer age, String tall, String weight, String workTime, String workExperience, String title, String safeCode, String managerId) {
+    public Coach(Integer coachId, String username, String password, String email, String telephone, String name, String img, String sex, Integer age, String tall, String weight, Date workTime, String workExperience, String title, String safeCode, String managerId) {
         this.coachId = coachId;
         this.username = username;
         this.password = password;
@@ -150,11 +166,11 @@ public class Coach {
         this.weight = weight;
     }
 
-    public String getWorkTime() {
+    public Date getWorkTime() {
         return workTime;
     }
 
-    public void setWorkTime(String workTime) {
+    public void setWorkTime(Date workTime) {
         this.workTime = workTime;
     }
 
@@ -204,7 +220,7 @@ public class Coach {
                 ", age=" + age +
                 ", tall='" + tall + '\'' +
                 ", weight='" + weight + '\'' +
-                ", workTime='" + workTime + '\'' +
+                ", workTime=" + workTime +
                 ", workExperience='" + workExperience + '\'' +
                 ", title='" + title + '\'' +
                 ", safeCode='" + safeCode + '\'' +

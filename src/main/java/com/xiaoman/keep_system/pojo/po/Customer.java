@@ -1,9 +1,6 @@
 package com.xiaoman.keep_system.pojo.po;
 
-import com.xiaoman.keep_system.pojo.vo.ChCoachVo;
-import com.xiaoman.keep_system.pojo.vo.CustomerVo;
-import com.xiaoman.keep_system.pojo.vo.LoginVo;
-import com.xiaoman.keep_system.pojo.vo.NewPassVo;
+import com.xiaoman.keep_system.pojo.vo.*;
 
 import java.util.Date;
 
@@ -48,6 +45,16 @@ public class Customer {
     public Customer(LoginVo loginVo){
         this.username = loginVo.getUsername();
         this.password = loginVo.getPassword();
+    }
+
+    public Customer(RegisterVo registerVo){
+        this.username = registerVo.getUsername();
+        this.password = registerVo.getPassword();
+        this.name = registerVo.getName();
+        this.email = registerVo.getEmail();
+        this.telephone = registerVo.getTelephone();
+        this.times = registerVo.getTimes();
+        this.joinTime = registerVo.getJoinTime();
     }
 
     public Customer(Integer customerId, String username, String password, String email, String telephone, String name, String sex, Integer age, String tall, String weight, Integer times, Date joinTime, String safeCode, Integer coachId) {

@@ -5,10 +5,7 @@ import com.xiaoman.keep_system.pojo.dto.TokenIdDto;
 import com.xiaoman.keep_system.pojo.po.Coach;
 import com.xiaoman.keep_system.pojo.po.Customer;
 import com.xiaoman.keep_system.pojo.po.Manager;
-import com.xiaoman.keep_system.pojo.vo.CodeVo;
-import com.xiaoman.keep_system.pojo.vo.LoginVo;
-import com.xiaoman.keep_system.pojo.vo.MailVo;
-import com.xiaoman.keep_system.pojo.vo.NewPassVo;
+import com.xiaoman.keep_system.pojo.vo.*;
 import com.xiaoman.keep_system.result.CodeMsg;
 import com.xiaoman.keep_system.result.Result;
 import com.xiaoman.keep_system.service.LoginService;
@@ -116,27 +113,27 @@ public class LoginController {
     }
 
     /**
-     * @param loginVo
+     * @param registerVo
      * @return com.xiaoman.keep_system.result.Result<java.lang.Object>
      * @desc 客户账户注册--管理员操作
      * @author Joe
      * @date 2020/1/25 21:25
      */
     @PostMapping("/reg_customer")
-    public Result<Integer> customerRegister(@RequestBody LoginVo loginVo) {
-        return Result.success(loginService.registerCus(loginVo));
+    public Result<Integer> customerRegister(@RequestBody RegisterVo registerVo) {
+        return Result.success(loginService.registerCus(registerVo));
     }
 
     /**
-     * @param loginVo
+     * @param regCoachVo
      * @return com.xiaoman.keep_system.result.Result<java.lang.Object>
      * @desc 教练账户注册--管理员操作
      * @author Joe
      * @date 2020/1/25 21:25
      */
     @PostMapping("/reg_coach")
-    public Result<Object> coachRegister(@RequestBody LoginVo loginVo) {
-        loginService.registerCoach(loginVo);
+    public Result<Object> coachRegister(@RequestBody RegCoachVo regCoachVo) {
+        loginService.registerCoach(regCoachVo);
         return Result.success(null);
     }
 
